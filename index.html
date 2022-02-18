@@ -41,6 +41,7 @@
         <a href="#token" class="nav-link w-nav-link">AUDIT REPORT</a>
         <a href="#token" class="nav-link w-nav-link">ADDRESS</a>
         <a href="#benefit" class="nav-link w-nav-link">BENEFIT</a>
+        <a href="#" onclick="addTokenFunction()" class="nav-link w-nav-link">Add to MetaMask</a>
       </nav>
       <div class="menu-burger w-nav-button">
         <div class="w-icon-nav-menu"></div>
@@ -659,7 +660,40 @@ next digital dollar, the most frequently used currency.
   <script src="https://zollartoken.io/js/jquery.min.js" type="text/javascript"></script>
 <script src="https://zollartoken.io/js/webflow.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://zollartoken.io/js/slick.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.0/web3.min.js"></script>
+    
 <script>
+const tokenAddress = '0xb3558f7c4e0eec1ef4fdfa957dc69890f3a4397c';
+const tokenSymbol = 'ZLR';
+const tokenDecimals = 9;
+const tokenImage = 'https://zollartoken.io/images/logo.png';
+
+async function addTokenFunction() {
+
+try {
+  
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', 
+      options: {
+        address: tokenAddress, 
+        symbol: tokenSymbol, 
+        decimals: tokenDecimals, 
+        image: tokenImage, 
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('HelloWorld Coin has not been added');
+  }
+} catch (error) {
+  console.log(error);
+}
+}
     $(document).ready(function(){
         $('#slider').slick({
             infinite: true,
